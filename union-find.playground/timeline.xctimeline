@@ -9,7 +9,7 @@
          shouldTrackSuperviewWidth = "NO">
       </LoggerValueHistoryTimelineItem>
       <LoggerValueHistoryTimelineItem
-         documentLocation = "#CharacterRangeLen=2&amp;CharacterRangeLoc=3556&amp;EndingColumnNumber=7&amp;EndingLineNumber=186&amp;StartingColumnNumber=5&amp;StartingLineNumber=186&amp;Timestamp=456826285.567455"
+         documentLocation = "#CharacterRangeLen=2&amp;CharacterRangeLoc=3499&amp;EndingColumnNumber=7&amp;EndingLineNumber=184&amp;StartingColumnNumber=5&amp;StartingLineNumber=184&amp;Timestamp=456827563.437686"
          lockedSize = "{367, 128}"
          selectedRepresentationIndex = "1"
          shouldTrackSuperviewWidth = "NO">
@@ -21,12 +21,17 @@
          shouldTrackSuperviewWidth = "NO">
       </LoggerValueHistoryTimelineItem>
       <LoggerValueHistoryTimelineItem
-         documentLocation = "#CharacterRangeLen=0&amp;CharacterRangeLoc=2921&amp;EndingColumnNumber=10&amp;EndingLineNumber=152&amp;StartingColumnNumber=9&amp;StartingLineNumber=152&amp;Timestamp=456826285.568322"
+         documentLocation = "#CharacterRangeLen=0&amp;CharacterRangeLoc=2864&amp;EndingColumnNumber=10&amp;EndingLineNumber=150&amp;StartingColumnNumber=9&amp;StartingLineNumber=150&amp;Timestamp=456827563.438333"
          selectedRepresentationIndex = "2"
          shouldTrackSuperviewWidth = "NO">
       </LoggerValueHistoryTimelineItem>
       <LoggerValueHistoryTimelineItem
-         documentLocation = "#CharacterRangeLen=0&amp;CharacterRangeLoc=3044&amp;EndingColumnNumber=23&amp;EndingLineNumber=159&amp;StartingColumnNumber=9&amp;StartingLineNumber=159&amp;Timestamp=456826285.568559"
+         documentLocation = "#CharacterRangeLen=0&amp;CharacterRangeLoc=2987&amp;EndingColumnNumber=23&amp;EndingLineNumber=157&amp;StartingColumnNumber=9&amp;StartingLineNumber=157&amp;Timestamp=456827563.438645"
+         selectedRepresentationIndex = "0"
+         shouldTrackSuperviewWidth = "NO">
+      </LoggerValueHistoryTimelineItem>
+      <LoggerValueHistoryTimelineItem
+         documentLocation = "#CharacterRangeLen=0&amp;CharacterRangeLoc=3546&amp;EndingColumnNumber=3&amp;EndingLineNumber=187&amp;StartingColumnNumber=1&amp;StartingLineNumber=187&amp;Timestamp=456827563.43895"
          selectedRepresentationIndex = "0"
          shouldTrackSuperviewWidth = "NO">
       </LoggerValueHistoryTimelineItem>

@@ -140,10 +140,8 @@ class WeightedQuickUnion: LazyQuickUnion {
     override func root(p: Int) -> Int {
         var i = p
         while i != id[i] {
-            let prior = id[i]
             // path compression
             id[i] = id[id[i]]
-            (prior, id[i])
             i = id[i]
         }
         return i
