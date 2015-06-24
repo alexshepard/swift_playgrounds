@@ -1,7 +1,7 @@
 //: Week 1 - Union Find
 
 //: Dynamic Connectivity
-protocol UF {
+protocol UnionFind {
     init(n: Int)
     
     func union(p: Int, q: Int)
@@ -12,7 +12,7 @@ protocol UF {
 }
 
 //: Quick Find Implementation
-class QuickFind: UF, CustomStringConvertible {
+class QuickFind: UnionFind, CustomStringConvertible {
     var id: [Int]
     
     required init(n: Int) {
