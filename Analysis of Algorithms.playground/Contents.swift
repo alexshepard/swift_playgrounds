@@ -32,7 +32,7 @@ func makeList(count: Int) -> [Int] {
 
 let lists: [[Int]] = {
     var lists = [[Int]]()
-    for i in 1..<10 {
+    for i in 1..<8 {
         let m = Int(pow(2.0, Double(i)))
         lists.append(makeList(m))
     }
@@ -75,6 +75,37 @@ for list in lists {
     }
     prevElapsed = elapsed
 }
+
+//: ### Order of Growth Classifications
+
+//: Binary Search
+
+protocol BinarySearch {
+    static func binarySearch(a: [Int], key: Int) -> Int
+}
+
+class FirstBinarySearch: BinarySearch {
+    static func binarySearch(a: [Int], key: Int) -> Int {
+        var lo = 0
+        var hi = a.count - 1
+        while lo <= hi {
+            let mid = lo + (hi - lo) / 2
+            if key < a[mid] {
+                hi = mid - 1
+            } else if key > a[mid] {
+                lo = mid + 1
+            } else {
+                return mid
+            }
+        }
+        return -1
+    }
+}
+
+let a = [6,13,14,25,33,43,51,53,64,72,84,93,95,96,97]
+
+var result = FirstBinarySearch.binarySearch(a, key: 34)
+
 
 
 
