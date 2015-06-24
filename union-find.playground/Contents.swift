@@ -11,6 +11,18 @@ protocol UnionFind {
     func count() -> Int
 }
 
+var pairs:[(p: Int, q: Int)] = []
+pairs.append(p: 4, q: 3)
+pairs.append(p: 3, q: 8)
+pairs.append(p: 6, q: 5)
+pairs.append(p: 9, q: 4)
+pairs.append(p: 3, q: 8)
+pairs.append(p: 6, q: 5)
+pairs.append(p: 9, q: 4)
+pairs.append(p: 2, q: 1)
+
+var uf: UnionFind
+
 //: Quick Find Implementation
 class QuickFind: UnionFind, CustomStringConvertible {
     var id: [Int]
@@ -52,20 +64,16 @@ class QuickFind: UnionFind, CustomStringConvertible {
 }
 
 //: QuickFind Demo
-var qf = QuickFind(n: 10)
-qf.union(4, q: 3)
-qf.union(3, q: 8)
-qf.union(6, q: 5)
-qf.union(9, q: 4)
-qf.union(2, q: 1)
-qf.connected(8, q: 9)
-qf.connected(5, q: 0)
-qf.union(5, q: 0)
-qf.union(7, q: 2)
-qf.union(6, q: 1)
+uf = QuickFind(n: 10)
+for (p, q) in pairs {
+    uf.union(p, q: q)
+    uf
+}
+uf.connected(8, q: 9)
+uf.connected(5, q: 0)
 
 //: Quick-union (lazy approach)
-class QuickUnion1: UnionFind, CustomStringConvertible {
+class LazyQuickUnion: UnionFind, CustomStringConvertible {
     var id: [Int]
     
     required init(n: Int) {
@@ -110,20 +118,78 @@ class QuickUnion1: UnionFind, CustomStringConvertible {
     
     // customStringConvertible
     var description: String {
-        return "QuickUnion1: \(self.id)"
+        return "LazyQuickUnion: \(self.id)"
     }
 }
 
 //: Quick-union (lazy) demo
-var qu = QuickUnion1(n: 10)
-qu.union(4, q: 3)
-qu.union(3, q: 8)
-qu.union(6, q: 5)
-qu.union(9, q: 4)
-qu.union(2, q: 1)
-qu.connected(8, q: 9)
-qu.connected(5, q: 0)
-qu.union(5, q: 0)
-qu.union(7, q: 2)
-qu.union(6, q: 1)
-qu.union(7, q: 3)
+uf = LazyQuickUnion(n: 10)
+for (p, q) in pairs {
+    uf.union(p, q: q)
+    uf
+}
+uf.connected(8, q: 9)
+uf.connected(5, q: 0)
+
+
+
+//: Quick-union (weighted with path compression)
+class WeightedQuickUnion: LazyQuickUnion {
+    var sz: [Int]
+    
+    override func root(p: Int) -> Int {
+        var i = p
+        while i != id[i] {
+            let prior = id[i]
+            // path compression
+            id[i] = id[id[i]]
+            (prior, id[i])
+            i = id[i]
+        }
+        return i
+    }
+    
+    override func union(p: Int, q: Int) {
+        
+        let i = root(p)
+        let j = root(q)
+        
+        if i == j {
+            return
+        }
+        
+        if sz[i] < sz[j] {
+            id[i] = j
+            sz[j] += sz[i]
+        } else {
+            id[j] = i
+            sz[i] += sz[j]
+        }
+    }
+    
+    required init(n: Int) {
+        sz = [Int]()
+        for _ in 0..<n {
+            sz.append(1)
+        }
+        super.init(n: n)
+    }
+    
+    override var description: String {
+        return "WeightedQuickUnion: \(id)"
+    }
+}
+
+//: Quick-union (weighted) demo
+uf = WeightedQuickUnion(n: 10)
+for (p, q) in pairs {
+    uf.union(p, q: q)
+    uf
+}
+uf.connected(8, q: 9)
+uf.connected(5, q: 0)
+
+
+
+
+
