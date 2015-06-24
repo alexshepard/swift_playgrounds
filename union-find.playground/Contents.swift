@@ -16,37 +16,37 @@ class QuickFind: UnionFind, CustomStringConvertible {
     var id: [Int]
     
     required init(n: Int) {
-        self.id = [Int]()
+        id = [Int]()
         for i in 0..<n {
-            self.id.append(i)
+            id.append(i)
         }
     }
     
     func union(p: Int, q: Int) {
-        let pid = self.id[p]
-        let qid = self.id[q]        
-        for i in 0..<self.id.count {
-            if self.id[i] == pid {
-                self.id[i] = qid
+        let pid = id[p]
+        let qid = id[q]
+        for i in 0..<id.count {
+            if id[i] == pid {
+                id[i] = qid
             }
         }
     }
     
     func connected(p: Int, q: Int) -> Bool {
-        return self.id[p] == self.id[q]
+        return id[p] == id[q]
     }
     
     func find(p: Int) -> Int {
-        return self.id[p]
+        return id[p]
     }
     
     func count() -> Int {
-        return self.id.count
+        return id.count
     }
     
     // CustomStringConvertible
     var description: String {
-        return "QuickFind \(self.id)"
+        return "QuickFind \(id)"
     }
     
 }
