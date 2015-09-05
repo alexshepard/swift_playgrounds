@@ -1,7 +1,7 @@
 //: Week 1 - Union Find
 
 //: Dynamic Connectivity
-protocol UnionFind {
+protocol UnionFind: CustomStringConvertible {
     init(n: Int)
     
     func union(p: Int, q: Int)
@@ -9,22 +9,23 @@ protocol UnionFind {
     
     func find(p: Int) -> Int
     func count() -> Int
+    
 }
 
 var pairs:[(p: Int, q: Int)] = []
-pairs.append(p: 4, q: 3)
-pairs.append(p: 3, q: 8)
-pairs.append(p: 6, q: 5)
-pairs.append(p: 9, q: 4)
-pairs.append(p: 3, q: 8)
-pairs.append(p: 6, q: 5)
-pairs.append(p: 9, q: 4)
-pairs.append(p: 2, q: 1)
+pairs.append((p: 4, q: 3))
+pairs.append((p: 3, q: 8))
+pairs.append((p: 6, q: 5))
+pairs.append((p: 9, q: 4))
+pairs.append((p: 3, q: 8))
+pairs.append((p: 6, q: 5))
+pairs.append((p: 9, q: 4))
+pairs.append((p: 2, q: 1))
 
 var uf: UnionFind
 
 //: Quick Find Implementation
-class QuickFind: UnionFind, CustomStringConvertible {
+class QuickFind: UnionFind {
     var id: [Int]
     
     required init(n: Int) {
@@ -58,7 +59,7 @@ class QuickFind: UnionFind, CustomStringConvertible {
     
     // CustomStringConvertible
     var description: String {
-        return "QuickFind \(id)"
+        return "QuickFind: \(id)"
     }
     
 }
@@ -67,13 +68,13 @@ class QuickFind: UnionFind, CustomStringConvertible {
 uf = QuickFind(n: 10)
 for (p, q) in pairs {
     uf.union(p, q: q)
-    uf
+    uf.description
 }
 uf.connected(8, q: 9)
 uf.connected(5, q: 0)
 
 //: Quick-union (lazy approach)
-class LazyQuickUnion: UnionFind, CustomStringConvertible {
+class LazyQuickUnion: UnionFind {
     var id: [Int]
     
     required init(n: Int) {
@@ -126,7 +127,7 @@ class LazyQuickUnion: UnionFind, CustomStringConvertible {
 uf = LazyQuickUnion(n: 10)
 for (p, q) in pairs {
     uf.union(p, q: q)
-    uf
+    uf.description
 }
 uf.connected(8, q: 9)
 uf.connected(5, q: 0)
@@ -182,7 +183,7 @@ class WeightedQuickUnion: LazyQuickUnion {
 uf = WeightedQuickUnion(n: 10)
 for (p, q) in pairs {
     uf.union(p, q: q)
-    uf
+    uf.description
 }
 uf.connected(8, q: 9)
 uf.connected(5, q: 0)
