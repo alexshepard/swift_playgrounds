@@ -37,7 +37,7 @@ class LLStackOfStrings: StackOfStrings, CustomStringConvertible {
     }
     
     func isEmpty() -> Bool {
-        return first != nil
+        return first == nil
     }
     
     func size() -> Int {
