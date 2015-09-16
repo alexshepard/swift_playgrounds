@@ -71,11 +71,12 @@ class ArrayStackOfStrings: StackOfStrings, CustomStringConvertible {
     }
     
     func push(item: String) {
-        
+        // need to handle overflow
         s[N++] = item
     }
     
     func pop() -> String? {
+        // need to handle underflow
         return s[--N]
     }
     
