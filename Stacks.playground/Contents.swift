@@ -77,6 +77,7 @@ class ArrayStackOfStrings: StackOfStrings, CustomStringConvertible {
     
     func pop() -> String? {
         // need to handle underflow
+        // loitering here: we're done with this str, but we're leaving it in the array
         return s[--N]
     }
     
