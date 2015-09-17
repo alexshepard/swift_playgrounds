@@ -94,17 +94,58 @@ class ArrayStackOfStrings: StackOfStrings, CustomStringConvertible {
     
     private
 
-    var s: [String] = [String]()
+    var s: [String]
     var N: Int = 0
     
     init(capacity: Int) {
-        // this doesn't feel ideal, but you can't index into an array in swift
-        // until it's had something appended index
-        for _ in 0...capacity {
+        s = [String](count: capacity, repeatedValue: String())
+    }
+}
+
+class ResizingArrayStackOfStrings: StackOfStrings, CustomStringConvertible {
+    // CustomStringConvertible
+    var description: String {
+        return "ResizingArrayStackOfStrings [[ \(self.size()) ]]"
+    }
+    
+    func push(item: String) {
+        if N == s.count {
+            resize(2 * s.count)
+        }
+        s[N++] = item
+    }
+    
+    func pop() -> String? {
+        // still loitering
+        return s[--N]
+    }
+    
+    func isEmpty() -> Bool {
+        return N == 0
+    }
+    
+    func size() -> Int {
+        return N
+    }
+    
+    private func resize(capacity: Int) {
+        for _ in s.count...capacity {
             s.append(String())
         }
     }
     
+    // Array Plumbing
+    // this is a swift array, but we won't use cheaty swift methods on it
+    
+    private
+    
+    var s: [String]
+    var N: Int = 0
+    
+    init() {
+        // start with a single element array
+        s = [String](count: 1, repeatedValue: String())
+    }
 }
 
 class SwiftArrayStackOfStrings: StackOfStrings, CustomStringConvertible {
@@ -146,7 +187,7 @@ class SwiftArrayStackOfStrings: StackOfStrings, CustomStringConvertible {
 let strings = "to be or not to - be - - that - - - is"
 let components = strings.componentsSeparatedByString(" ")
 
-var s: StackOfStrings = ArrayStackOfStrings(capacity: 10)
+var s: StackOfStrings = ResizingArrayStackOfStrings()
 for str in components {
     if str == "-" {
         s.pop()
@@ -154,6 +195,4 @@ for str in components {
         s.push(str)
     }
 }
-s
-
 
