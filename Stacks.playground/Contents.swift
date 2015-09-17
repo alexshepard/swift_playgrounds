@@ -116,8 +116,15 @@ class ResizingArrayStackOfStrings: StackOfStrings, CustomStringConvertible {
     }
     
     func pop() -> String? {
-        // still loitering
-        return s[--N]
+        let retVal = s[--N]
+        
+        // no loitering
+        // shrink if 1/4 full to avoid thrashing
+        if N > 0 && N == s.count / 4 {
+            resize(s.count / 2)
+        }
+
+        return retVal
     }
     
     func isEmpty() -> Bool {
@@ -125,13 +132,16 @@ class ResizingArrayStackOfStrings: StackOfStrings, CustomStringConvertible {
     }
     
     func size() -> Int {
-        return N
+        // N is used size, s.capacity is the backing data store size
+        return s.capacity
     }
     
     private func resize(capacity: Int) {
-        for _ in s.count...capacity {
-            s.append(String())
+        var copy: [String] = [String](count: capacity, repeatedValue: String())
+        for i in 0..<N {
+            copy[i] = s[i]
         }
+        s = copy
     }
     
     // Array Plumbing
@@ -189,6 +199,10 @@ let components = strings.componentsSeparatedByString(" ")
 
 var s: StackOfStrings = ResizingArrayStackOfStrings()
 for str in components {
+    
+    // chart the size, particularly useful for watching resizing
+    s.size()
+
     if str == "-" {
         s.pop()
     } else {
