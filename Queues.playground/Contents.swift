@@ -17,7 +17,7 @@ class LLQueueOfStrings: QueueOfStrings, CustomStringConvertible {
         return "LLQueueOfStrings [[ \(self.size()) ]]"
     }
     
-    // StackOfStrings
+    // QueueOfStrings
     func enqueue(item: String) {
         // save the item at the end
         let oldLast = self.last
