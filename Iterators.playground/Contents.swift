@@ -18,11 +18,8 @@ class LLQueue<T>: Queue, CustomStringConvertible {
         return "LLQueue [[ \(self.size()) ]]"
     }
     
-    typealias Generator = AnyGenerator<T>
     func generate() -> AnyGenerator<T> {
-        
         var n:Node? = self.first
-        
         return anyGenerator {
             let this: Node? = n
             n = n?.next
