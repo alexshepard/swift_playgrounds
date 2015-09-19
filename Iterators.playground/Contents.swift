@@ -94,4 +94,6 @@ for url in urlQueue {
     print("url is \(url)")
 }
 
+urlQueue.dequeue()
+urlQueue.dequeue()
 
