@@ -2,7 +2,6 @@
 
 import UIKit
 
-// not generic yet
 protocol Queue {
     typealias T
     func enqueue(item: T)
@@ -88,4 +87,70 @@ if let url = NSURL(string: "http://www.inaturalist.org") {
 }
 urlQueue.dequeue()
 urlQueue.dequeue()
+
+
+//: now let's try a generic array-backed stack
+protocol Stack {
+    typealias T
+    func push(item: T)
+    func pop() -> T?
+    func isEmpty() -> Bool
+    func size() -> Int
+}
+
+// simplest stack implementation, just want to see it in a generic
+class ArrayStack<T>: Stack, CustomStringConvertible {
+    // CustomStringConvertible
+    var description: String {
+        return "ArrayStack [[ \(self.size()) ]]"
+    }
+    
+    func push(item: T) {
+        // overflow not handled
+        s[N++] = item
+    }
+    
+    func pop() -> T? {
+        // underflow not handled
+        // loitering here: we're done with this str, but we're leaving it in the array
+        return s[--N]
+    }
+    
+    func isEmpty() -> Bool {
+        return N == 0
+    }
+    
+    func size() -> Int {
+        return N
+    }
+    
+    // Array Plumbing
+    // this is a swift array, but we won't use cheaty swift methods on it
+    
+    private
+    
+    var s: [T?]
+    var N: Int = 0
+    
+    init(capacity: Int) {
+        s = [T?](count: capacity, repeatedValue: nil)
+    }
+}
+
+let strings = "to be or not to - be - - that - - - is"
+let components = strings.componentsSeparatedByString(" ")
+
+var s = ArrayStack<String>(capacity: 10)
+
+for str in components {
+    
+    s.size()
+    
+    if str == "-" {
+        s.pop()
+    } else {
+        s.push(str)
+    }
+}
+
 
